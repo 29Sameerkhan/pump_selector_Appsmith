@@ -1,0 +1,20 @@
+{
+  "gitSyncId": "6927f7cea8c2381c45a2a216_e6bf37ae-fc58-4972-b1a4-dad6ff1159ea",
+  "id": "Pump Selector_JSObject1",
+  "unpublishedCollection": {
+    "name": "JSObject1",
+    "pageId": "Pump Selector",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "myVar1",
+        "value": "[]"
+      },
+      {
+        "name": "myVar2",
+        "value": "{}"
+      }
+    ]
+  }
+}

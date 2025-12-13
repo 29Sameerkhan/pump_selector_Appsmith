@@ -1,0 +1,15 @@
+SELECT
+  m.model_code,
+  m.hp,
+  pp.discharge_lpm,
+  pp.head_m
+FROM models m
+JOIN performance_points pp
+  ON pp.model_id = m.id
+WHERE m.is_active = 1
+ORDER BY
+  (pp.discharge_lpm < {{ Input_Discharge.text || 0 }}),          -- 0 if ≥ target, 1 if below
+  ABS(pp.discharge_lpm - {{ Input_Discharge.text || 0 }}) ASC,   -- closest discharge
+  ABS(pp.head_m        - {{ Input_Head.text || 0 }})      ASC,   -- then closest head
+  m.hp ASC
+LIMIT 1;

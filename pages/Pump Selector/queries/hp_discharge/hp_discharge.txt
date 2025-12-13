@@ -1,0 +1,15 @@
+SELECT
+  m.model_code,
+  m.hp,
+  pp.discharge_lpm,
+  pp.head_m
+FROM models m
+JOIN performance_points pp
+  ON pp.model_id = m.id
+WHERE m.is_active = 1
+  AND ABS(m.hp - {{ Input_HP.text || 0 }}) < 1e-9
+ORDER BY
+  (pp.discharge_lpm < {{ Input_Discharge.text || 0 }}),
+  pp.discharge_lpm ASC,
+  ABS(pp.discharge_lpm - {{ Input_Discharge.text || 0 }})
+LIMIT 1;
