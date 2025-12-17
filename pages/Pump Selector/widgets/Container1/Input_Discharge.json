@@ -38,7 +38,7 @@
   "isRequired": false,
   "isVisible": "{{ MultiSelect_Params.selectedOptionValues.includes(\"DISCHARGE\") }}",
   "key": "tvtofpj79y",
-  "label": "Input_Discharge (LPM)",
+  "label": "Enter Discharge (LPM)",
   "labelAlignment": "left",
   "labelPosition": "Top",
   "labelStyle": "BOLD",

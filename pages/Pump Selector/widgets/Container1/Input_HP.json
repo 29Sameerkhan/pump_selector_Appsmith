@@ -45,7 +45,7 @@
   "isRequired": "{{ MultiSelect_Params.selectedOptionValues.includes(\"HP\") }}",
   "isVisible": "{{ MultiSelect_Params.selectedOptionValues.includes(\"HP\") }}",
   "key": "tvtofpj79y",
-  "label": "Input_HP",
+  "label": "Enter HP",
   "labelAlignment": "left",
   "labelPosition": "Top",
   "labelStyle": "BOLD",

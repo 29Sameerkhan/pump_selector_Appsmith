@@ -38,7 +38,7 @@
   "isRequired": false,
   "isVisible": "{{ MultiSelect_Params.selectedOptionValues.includes(\"HEAD\") }}",
   "key": "tvtofpj79y",
-  "label": "Input_Head (Meter)",
+  "label": "Enter Head (Meter)",
   "labelAlignment": "left",
   "labelPosition": "Top",
   "labelStyle": "BOLD",
