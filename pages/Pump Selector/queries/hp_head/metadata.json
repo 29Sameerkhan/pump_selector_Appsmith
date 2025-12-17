@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n  m.model_code,\n  m.hp,\n  pp.discharge_lpm,\n  pp.head_m\nFROM models m\nJOIN performance_points pp\n  ON pp.model_id = m.id\nWHERE m.is_active = 1\n  AND ABS(m.hp - {{ Input_HP.text || 0 }}) < 1e-9\nORDER BY\n  ABS(pp.head_m - {{ Input_Head.text || 0 }}) ASC,\n  pp.discharge_lpm DESC\nLIMIT 1;\n",
+      "body": "SELECT\n  m.model_code,\n  m.hp,\n  pp.discharge_lpm,\n  pp.head_m\nFROM models m\nJOIN performance_points pp\n  ON pp.model_id = m.id\nWHERE m.is_active = 1\n  AND ABS(m.hp - {{ Input_HP.text || 0 }}) < 1e-9\nORDER BY\n  ABS(pp.head_m - {{ Input_Head.text || 0 }}) ASC,\n  pp.discharge_lpm DESC\nLIMIT 2;\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

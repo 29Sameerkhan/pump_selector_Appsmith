@@ -11,4 +11,4 @@ WHERE m.is_active = 1
 ORDER BY
   ABS(pp.head_m - {{ Input_Head.text || 0 }}) ASC,
   pp.discharge_lpm DESC
-LIMIT 1;
+LIMIT 2;
