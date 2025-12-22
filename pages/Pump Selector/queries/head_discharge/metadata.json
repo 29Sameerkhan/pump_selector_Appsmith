@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT\n  m.model_code,\n  m.hp,\n  pp.discharge_lpm,\n  pp.head_m\nFROM models m\nJOIN performance_points pp\n  ON pp.model_id = m.id\nWHERE m.is_active = 1\nORDER BY\n  (pp.discharge_lpm < {{ Input_Discharge.text || 0 }}),          -- 0 if ≥ target, 1 if below\n  ABS(pp.discharge_lpm - {{ Input_Discharge.text || 0 }}) ASC,   -- closest discharge\n  ABS(pp.head_m        - {{ Input_Head.text || 0 }})      ASC,   -- then closest head\n  m.hp ASC\nLIMIT 1;\n",
+      "body": "SELECT\n  m.model_code,\n  m.hp,\n  pp.discharge_lpm,\n  pp.head_m\nFROM models m\nJOIN performance_points pp ON pp.model_id = m.id\nWHERE m.is_active = 1\n  AND pp.discharge_lpm >= {{ Input_Discharge.text || 0 }}\n  AND pp.head_m        >= {{ Input_Head.text || 0 }}\nORDER BY\n  m.hp ASC,                                    -- prefer lower HP first\n  pp.discharge_lpm ASC,                         -- closest discharge above target\n  pp.head_m ASC                                 -- closest head above target\nLIMIT 1;\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
