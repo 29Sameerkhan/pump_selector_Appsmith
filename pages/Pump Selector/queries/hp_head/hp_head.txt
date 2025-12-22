@@ -4,10 +4,16 @@ SELECT
   pp.discharge_lpm,
   pp.head_m
 FROM models m
-JOIN performance_points pp
-  ON pp.model_id = m.id
+JOIN performance_points pp ON pp.model_id = m.id
 WHERE m.is_active = 1
   AND ABS(m.hp - {{ Input_HP.text || 0 }}) < 1e-9
+
+  -- ✅ Option B: omit the 1st (minimum) discharge point for each model
+  AND pp.discharge_lpm >
+      (SELECT MIN(pp2.discharge_lpm)
+       FROM performance_points pp2
+       WHERE pp2.model_id = m.id)
+
 ORDER BY
   ABS(pp.head_m - {{ Input_Head.text || 0 }}) ASC,
   pp.discharge_lpm DESC
