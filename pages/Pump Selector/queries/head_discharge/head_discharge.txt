@@ -6,10 +6,19 @@ SELECT
 FROM models m
 JOIN performance_points pp ON pp.model_id = m.id
 WHERE m.is_active = 1
+
+  -- ✅ Option B: omit the 1st (minimum) discharge point for each model
+  AND pp.discharge_lpm >
+      (SELECT MIN(pp2.discharge_lpm)
+       FROM performance_points pp2
+       WHERE pp2.model_id = m.id)
+
+  -- ✅ strict duty point match
   AND pp.discharge_lpm >= {{ Input_Discharge.text || 0 }}
   AND pp.head_m        >= {{ Input_Head.text || 0 }}
+
 ORDER BY
-  m.hp ASC,                                    -- prefer lower HP first
-  pp.discharge_lpm ASC,                         -- closest discharge above target
-  pp.head_m ASC                                 -- closest head above target
+  m.hp ASC,              -- prefer lower HP first
+  pp.discharge_lpm ASC,  -- closest discharge above target
+  pp.head_m ASC          -- closest head above target
 LIMIT 1;
